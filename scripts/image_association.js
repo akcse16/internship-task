@@ -4,8 +4,9 @@ const eleBlanks = document.getElementById('fillBlanks'),
     eleNextStageButton = document.getElementById('nextStageButton'),
     eleCssHead = document.getElementById('cssHead'),
     eleResetButton = document.getElementById('resetButton'),
-    eleImage = document.getElementById('question_image')
+    eleImage = document.getElementById('question_image'),
     eleQuestion = document.getElementById('question')
+
 
 var startBtnClickCount = 0;
 // const eleImageCaption = document.getElementById('captionImage')
@@ -38,14 +39,14 @@ const makeElement = (type, elementID, elementClass, value = "", text = "", width
     }
     return element
 }
-
+ // to update input
 const updateInput = (event) =>{
     // console.log('fired updateInput');
     let input = eleBlanks.getElementsByTagName('input')[0]
     input.value = event.target.innerText
 	userAnswer = input.value
 }
-  
+  // to set input
 const setModule = () =>{
 
     eleBlanks.innerHTML = ""
@@ -59,9 +60,14 @@ const setModule = () =>{
 
     // eleImage.setAttribute("src",currentData.asset)
 
+// to set the response in the blank area
+
+
     const requiredAnswer = makeElement('input', `question`, 'col-auto blank-input')
     // requiredAnswer.addEventListener('change', speakWord)
     eleBlanks.append(requiredAnswer)
+
+// to get option array
 
     for (let i = 0; i < optionsArray.length; i++) {
         const day = makeElement('div', `day${i}`, 'col-auto box', "", optionsArray[i])
@@ -73,6 +79,7 @@ const setModule = () =>{
         eleShuffledArray.append(day)
     }   
 
+// to set question array
 
 for (let i = 0; i < question.length; i++) {
         const ques = makeElement('div', `question${i}`, 'col-auto box', "", question[i].value)
@@ -84,16 +91,25 @@ for (let i = 0; i < question.length; i++) {
             eleQuestion.append(ques)
         }
         if (question[i].state === 1){
-            eleQuestion.append('\xa0\xa0\xa0\xa0\xa0\ _____________ \xa0\xa0\xa0\xa0\xa0')
+            const eleblank=document.getElementById('blank')
+            eleQuestion.append(eleblank)
+            // eleQuestion.append('\xa0\xa0\xa0\xa0\xa0\ _____________ \xa0\xa0\xa0\xa0\xa0')
+          
         } 
+
+
+        
 
     }
 }
 
+// to reset input
 
 const resetModule = (event) =>{
     eleBlanks.getElementsByTagName('input')[0].value = ""
 }
+
+// to update user data
 
 const updateUserData = (dataObject) => {
     startTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
@@ -105,6 +121,8 @@ const updateUserData = (dataObject) => {
 
     setModule()
 }
+
+ // get Method
 
 const getMethod = (url) => {
     /*fetch(url, {
@@ -135,6 +153,8 @@ const getMethod = (url) => {
         }
     })
 }
+
+// post Method
 
 const postMethod = (url) => {
     let data = {
@@ -168,6 +188,7 @@ const postMethod = (url) => {
 }
 
 
+// to handle post responses
 
 const handlePostResponse = (dataObject) => {
     // console.log(dataObject);
@@ -189,6 +210,8 @@ const handlePostResponse = (dataObject) => {
         document.addEventListener('keydown',function(){eleInput.classList.remove('incorrect_answer');resetModule();},{once:true, capture:true})
     }
 }
+ 
+ // to check the answer is correct
 
 const validateAnswer = (event)=>{
     endTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
