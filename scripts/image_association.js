@@ -91,8 +91,8 @@ for (let i = 0; i < question.length; i++) {
             eleQuestion.append(ques)
         }
         if (question[i].state === 1){
-            const eleblank=document.getElementById('blank')
-            eleQuestion.append(eleblank)
+            // const eleblank=document.getElementById('blank')
+            eleQuestion.append(eleBlanks)
             // eleQuestion.append('\xa0\xa0\xa0\xa0\xa0\ _____________ \xa0\xa0\xa0\xa0\xa0')
           
         } 
